@@ -10,26 +10,22 @@ function Landing() {
   return (
     <div className="landing__main">
       <div className="landing__heading">
-        <h1
-          data-aos="fade-in"
-          data-aos-duration="3000"
-          data-aos-delay="300"
-          style={{
-            transform: upperHoverDirection,
-          }}
-        >
-          Sophisticated
-        </h1>
-        <h1
-          data-aos="fade-in"
-          data-aos-duration="3000"
-          data-aos-delay="300"
-          style={{
-            transform: lowerHoverDirection,
-          }}
-        >
-          skincare
-        </h1>
+        <div data-aos="fade-in" data-aos-duration="3000" data-aos-delay="300">
+          <h1
+            style={{
+              transform: upperHoverDirection,
+            }}
+          >
+            Sophisticated
+          </h1>
+          <h1
+            style={{
+              transform: lowerHoverDirection,
+            }}
+          >
+            skincare
+          </h1>
+        </div>
         <div className="ai__description">
           SKINSTRIC DEVELOPED AN A.I. THAT CREATES A
           <br />
