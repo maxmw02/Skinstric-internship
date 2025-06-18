@@ -11,6 +11,9 @@ function Landing() {
     <div className="landing__main">
       <div className="landing__heading">
         <h1
+          data-aos="fade-in"
+          data-aos-duration="3000"
+          data-aos-delay="300"
           style={{
             transform: upperHoverDirection,
           }}
@@ -18,6 +21,9 @@ function Landing() {
           Sophisticated
         </h1>
         <h1
+          data-aos="fade-in"
+          data-aos-duration="3000"
+          data-aos-delay="300"
           style={{
             transform: lowerHoverDirection,
           }}
