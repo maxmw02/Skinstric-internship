@@ -64,7 +64,8 @@ function Landing() {
         >
           <div className="section__wrapper">
             <div className="section__border"></div>
-            <button
+            <a
+              href="/intro"
               id="test__btn"
               onMouseEnter={() => {
                 setTestHover(true);
@@ -80,7 +81,7 @@ function Landing() {
               <span className="right__btn--name">TAKE TEST</span>
               <div className="right__btn--border"></div>
               <span className="right__triangle">▶</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>
