@@ -9,11 +9,66 @@ function IntroForm() {
   const [location, setLocation] = useState("");
   const [formState, setFormState] = useState("name");
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     localStorage.setItem("name", userName);
     localStorage.setItem("location", location);
   }, [userName, location]);
+
+  const validateInput = (value) => {
+    const regex = /^[a-zA-Z\s]*$/;
+    return regex.test(value);
+  };
+
+  const handleNameInput = (event) => {
+    if (event.key === "Enter") {
+      const nameValue = event.target.value.trim();
+      if (nameValue === "") {
+        setError(true);
+        setErrorMessage("Name cannot be empty.");
+        setUserName("");
+      } else if (!validateInput(nameValue)) {
+        setError(true);
+        setErrorMessage(
+          "Please enter a valid name without numbers or special characters."
+        );
+        setUserName("");
+      } else {
+        setError(false);
+        setErrorMessage("");
+        setUserName(nameValue);
+        setFormState("location");
+      }
+    }
+  };
+
+  const handleLocationInput = (event) => {
+    if (event.key === "Enter") {
+      const locationValue = event.target.value.trim();
+      if (locationValue === "") {
+        setError(true);
+        setErrorMessage("Location cannot be empty.");
+        setLocation("");
+      } else if (!validateInput(locationValue)) {
+        setError(true);
+        setErrorMessage(
+          "Please enter a valid city name without numbers or special characters."
+        );
+        setLocation("");
+      } else {
+        setError(false);
+        setErrorMessage("");
+        setLocation(locationValue);
+        loadingState();
+      }
+    }
+  };
+
+  const loadingState = () => {
+    setFormState("loading");
+    setTimeout(setFormState("proceed"), 4000);
+  };
 
   return (
     <div className="intro__main">
@@ -29,41 +84,22 @@ function IntroForm() {
                 event.preventDefault();
               }}
             >
-              {error ? (
+              {error && (
                 <div className="error__wrapper">
-                  <p>
-                    Please enter a valid city without numbers or special
-                    characters
-                  </p>
+                  <p>{errorMessage}</p>
                 </div>
-              ) : (
-                <div></div>
               )}
               <input
                 type="text"
                 autoComplete="off"
                 placeholder="your city name"
-                onKeyUp={(event) => {
-                  if (event.key === "Enter") {
-                    setLocation(event.target.value);
-                    for (let i = 0; i < location.length; i++) {
-                      const charCode = location.charCodeAt(i);
-                      console.log(charCode);
-                      if (
-                        !(charCode >= 65 && charCode <= 90) &&
-                        !(charCode >= 97 && charCode <= 122)
-                      ) {
-                        setError(true);
-                        setLocation("");
-                      } else {
-                        setFormState("loading");
-                        setError(false)
-                      }
-                    }
-                  }
-                }}
+                onKeyUp={handleLocationInput}
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
               />
-              <button type="submit">Submit</button>
+              <button type="submit" style={{ display: "none" }}>
+                Submit
+              </button>{" "}
             </form>
           </>
         )}
@@ -77,37 +113,41 @@ function IntroForm() {
             >
               {error && (
                 <div className="error__wrapper">
-                  <p>
-                    Please enter a valid city without numbers or special
-                    characters
-                  </p>
+                  <p>{errorMessage}</p>
                 </div>
               )}
               <input
                 type="text"
                 autoComplete="off"
                 placeholder="Introduce Yourself"
-                onKeyUp={(event) => {
-                  if (event.key === "Enter") {
-                    setUserName(event.target.value);
-                    for (let i = 0; i < location.length; i++) {
-                      const charCode = location.charCodeAt(i);
-                      console.log(charCode);
-                      if (
-                        !(charCode >= 65 && charCode <= 90) &&
-                        !(charCode >= 97 && charCode <= 122)
-                      ) {
-                        setError(true);
-                        setUserName("");
-                      } else {
-                        setFormState("location");
-                      }
-                    }
-                  }
-                }}
+                onKeyUp={handleNameInput}
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
-              <button type="submit">Submit</button>
+              <button type="submit" style={{ display: "none" }}>
+                Submit
+              </button>{" "}
             </form>
+          </>
+        )}
+        {formState === "loading" && (
+          <>
+            <div className="loading__state">
+              <div className="loading__state--title">Submission processing</div>
+              <div className="dots">
+                <div className="dot1"></div>
+                <div className="dot2"></div>
+                <div className="dot3"></div>
+              </div>
+            </div>
+          </>
+        )}
+        {formState === "proceed" && (
+          <>
+            <div className="proceed__wrapper">
+              <div className="proceed__title">Thank you!</div>
+              <div className="proceed__direction">Proceed to the next step</div>
+            </div>
           </>
         )}
         <img src={Big_Square} alt="" className="big__square" />
