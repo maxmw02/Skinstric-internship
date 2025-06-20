@@ -26,12 +26,12 @@ function IntroForm() {
       const nameValue = event.target.value.trim();
       if (nameValue === "") {
         setError(true);
-        setErrorMessage("Name cannot be empty.");
+        setErrorMessage("Name cannot be empty");
         setUserName("");
       } else if (!validateInput(nameValue)) {
         setError(true);
         setErrorMessage(
-          "Please enter a valid name without numbers or special characters."
+          "Please enter a valid name without numbers or special characters"
         );
         setUserName("");
       } else {
@@ -48,12 +48,12 @@ function IntroForm() {
       const locationValue = event.target.value.trim();
       if (locationValue === "") {
         setError(true);
-        setErrorMessage("Location cannot be empty.");
+        setErrorMessage("Location cannot be empty");
         setLocation("");
       } else if (!validateInput(locationValue)) {
         setError(true);
         setErrorMessage(
-          "Please enter a valid city name without numbers or special characters."
+          "Please enter a valid city name without numbers or special characters"
         );
         setLocation("");
       } else {
@@ -67,7 +67,9 @@ function IntroForm() {
 
   const loadingState = () => {
     setFormState("loading");
-    setTimeout(setFormState("proceed"), 4000);
+    setTimeout(() => {
+      setFormState("proceed");
+    }, 4000);
   };
 
   return (
