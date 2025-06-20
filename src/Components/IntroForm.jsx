@@ -57,6 +57,7 @@ function IntroForm() {
                         setLocation("");
                       } else {
                         setFormState("loading");
+                        setError(false)
                       }
                     }
                   }
@@ -124,11 +125,13 @@ function IntroForm() {
             <div className="back__btn--title">BACK</div>
           </div>
         </a>
-        <a href="/analysis" className="proceed__btn">
-          <div className="proceed__btn--title">PROCEED</div>
-          <div className="proceed__btn--border"></div>
-          <div className="proceed__btn--triangle">▶</div>
-        </a>
+        {formState === "proceed" && (
+          <a href="/" className="proceed__btn">
+            <div className="proceed__btn--title">PROCEED</div>
+            <div className="proceed__btn--border"></div>
+            <div className="proceed__btn--triangle">▶</div>
+          </a>
+        )}
       </div>
     </div>
   );
