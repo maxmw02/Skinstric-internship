@@ -85,6 +85,14 @@
   }
 }
 
+.error__wrapper {
+  margin-top: 4px;
+  display: none;
+}
+.error__wrapper p {
+  color: red;
+}
+
 .intro__btns {
   position: absolute;
   bottom: 32px;

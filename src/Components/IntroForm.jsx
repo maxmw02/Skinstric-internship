@@ -8,6 +8,7 @@ function IntroForm() {
   const [userName, setUserName] = useState("");
   const [location, setLocation] = useState("");
   const [formState, setFormState] = useState("name");
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("name", userName);
@@ -28,9 +29,16 @@ function IntroForm() {
                 event.preventDefault();
               }}
             >
+              {error ? (
                 <div className="error__wrapper">
-                    <p>Please enter a valid city without numbers or special characters</p>
+                  <p>
+                    Please enter a valid city without numbers or special
+                    characters
+                  </p>
                 </div>
+              ) : (
+                <div></div>
+              )}
               <input
                 type="text"
                 autoComplete="off"
@@ -38,7 +46,19 @@ function IntroForm() {
                 onKeyUp={(event) => {
                   if (event.key === "Enter") {
                     setLocation(event.target.value);
-                    setFormState("loading");
+                    for (let i = 0; i < location.length; i++) {
+                      const charCode = location.charCodeAt(i);
+                      console.log(charCode);
+                      if (
+                        !(charCode >= 65 && charCode <= 90) &&
+                        !(charCode >= 97 && charCode <= 122)
+                      ) {
+                        setError(true);
+                        setLocation("");
+                      } else {
+                        setFormState("loading");
+                      }
+                    }
                   }
                 }}
               />
@@ -54,6 +74,14 @@ function IntroForm() {
                 event.preventDefault();
               }}
             >
+              {error && (
+                <div className="error__wrapper">
+                  <p>
+                    Please enter a valid city without numbers or special
+                    characters
+                  </p>
+                </div>
+              )}
               <input
                 type="text"
                 autoComplete="off"
@@ -61,7 +89,19 @@ function IntroForm() {
                 onKeyUp={(event) => {
                   if (event.key === "Enter") {
                     setUserName(event.target.value);
-                    setFormState("location");
+                    for (let i = 0; i < location.length; i++) {
+                      const charCode = location.charCodeAt(i);
+                      console.log(charCode);
+                      if (
+                        !(charCode >= 65 && charCode <= 90) &&
+                        !(charCode >= 97 && charCode <= 122)
+                      ) {
+                        setError(true);
+                        setUserName("");
+                      } else {
+                        setFormState("location");
+                      }
+                    }
                   }
                 }}
               />
