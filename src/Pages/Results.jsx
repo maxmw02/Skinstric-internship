@@ -19,14 +19,16 @@ function Results() {
           <div className="results__options--rotate">
             <div className="results__upper">
               <div className="results__option upper__option">
-                <a href="/">
+                <a href="/demographics">
                   <button
                     className="dark__gray dark__gray--hover scale--hover"
                     onMouseEnter={() => {
                       setScale("1.08");
+                      setOpacity("1");
                     }}
                     onMouseLeave={() => {
                       setScale("0");
+                      setOpacity("0");
                     }}
                   >
                     <span>DEMOGRAPHICS</span>
@@ -61,7 +63,7 @@ function Results() {
                     className="light__gray dark__gray--hover no-pointer"
                     onMouseEnter={() => {
                       setScale("1.15");
-                      setOpacity("0");
+                      setOpacity("1");
                     }}
                     onMouseLeave={() => {
                       setScale("0");
@@ -78,7 +80,7 @@ function Results() {
                     className="light__gray dark__gray--hover no-pointer"
                     onMouseEnter={() => {
                       setScale("1.2");
-                      setOpacity("0");
+                      setOpacity("1");
                     }}
                     onMouseLeave={() => {
                       setScale("0");
@@ -97,6 +99,7 @@ function Results() {
           className="small__square--results"
           style={{
             scale: scale,
+            opacity: opacity,
           }}
         />
       </div>
@@ -111,7 +114,7 @@ function Results() {
             <div className="back__btn--title">BACK</div>
           </div>
         </a>
-        <a href="/analysis" className="proceed__btn">
+        <a href="/demographics" className="proceed__btn">
           <div className="proceed__btn--title">Get Summary</div>
           <div className="proceed__btn--border"></div>
           <div className="proceed__btn--triangle">▶</div>

@@ -6,6 +6,7 @@ import "aos/dist/aos.css";
 import Intro from "./Pages/Intro";
 import Analysis from "./Pages/Analysis";
 import Results from "./Pages/Results";
+import Demographics from "./Pages/Demographics";
 AOS.init();
 
 AOS.init({
@@ -36,6 +37,7 @@ function App() {
           <Route path="/intro" element={<Intro/>} />
           <Route path="/analysis" element={<Analysis/>} />
           <Route path="/results" element={<Results />} />
+          <Route path="/demographics" element={<Demographics />} />
         </Routes>
       </BrowserRouter>
     </div>
