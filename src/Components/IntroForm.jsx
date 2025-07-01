@@ -168,7 +168,7 @@ function IntroForm() {
           </div>
         </a>
         {formState === "proceed" && (
-          <a href="/" className="proceed__btn">
+          <a href="/analysis" className="proceed__btn">
             <div className="proceed__btn--title">PROCEED</div>
             <div className="proceed__btn--border"></div>
             <div className="proceed__btn--triangle">▶</div>
