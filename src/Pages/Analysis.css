@@ -31,18 +31,23 @@
 }
 
 .scan__btn {
-    display: flex;
+  display: flex;
   cursor: pointer;
   transform: scale(1);
+  background-color: transparent;
   transition: all 400ms ease;
 }
 .scan__btn:hover {
   transform: scale(1.05);
 }
 
+.scan__btn input {
+  display: none;
+}
+
 .scan__btn--description {
   position: absolute;
-  left: 300px;
+  left: 113px;
   top: -25px;
 }
 
@@ -67,18 +72,23 @@
 }
 
 .gallery__btn {
-    display: flex;
+  display: flex;
   cursor: pointer;
   transform: scale(1);
+  background-color: transparent;
   transition: all 400ms ease;
 }
 .gallery__btn:hover {
   transform: scale(1.05);
 }
 
+.gallery__btn input {
+  display: none;
+}
+
 .gallery__btn--description {
   position: absolute;
-  right: 300px;
+  right: 113px;
   top: 100px;
 }
 
@@ -162,17 +172,25 @@
 }
 
 .preview {
-    position: absolute;
-    top: 90px;
-    right: 25px;
+  position: absolute;
+  top: 90px;
+  right: 25px;
 }
 .preview__title {
-    font-size: 14px;
-    margin-bottom: 4px;
+  font-size: 14px;
+  margin-bottom: 4px;
 }
 
 .preview__picture--box {
-    height: 128px;
-    width: 128px;
-    border: 1px solid #d1d5dc;
+  max-width: 128px;
+  max-height: 128px;
+  height: 128px;
+  width: 128px;
+  border: 1px solid #d1d5dc;
+  object-fit: scale-down;
+}
+
+.preview__picture--box-img {
+  width: 128px;
+  object-fit: scale-down;
 }

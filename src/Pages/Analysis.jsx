@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Analysis.css";
 import Nav from "../Components/Nav";
 import Big_Square from "../Assets/Rectangle 2780.png";
@@ -8,9 +8,20 @@ import camera_icon from "../Assets/camera-icon.png";
 import gallery_icon from "../Assets/gallery-icon.png";
 import line from "../Assets/Group 39690.png";
 
-function Analysis() {
-  const [loading, setLoading] = useState(false);
-  const [preview, setPreview] = useState("")
+function Analysis({ loading, preview, handleFileSelect, uploadImage}) {
+  const galleryInputRef = useRef(null)
+  const scanInputRef = useRef(null)
+
+
+
+
+  const handleGalleryClick = () => {
+    galleryInputRef.current.click();
+  }
+  const handleScanClick = () => {
+    scanInputRef.current.click();
+  }
+
   return (
     <>
       <Nav />
@@ -22,7 +33,9 @@ function Analysis() {
           {loading ? (
             <div className="analysis__loading">
               <div className="loading__wrapper">
-                <div className="analysis__loading--title">PREPARING YOUR ANALYSIS...</div>
+                <div className="analysis__loading--title">
+                  PREPARING YOUR ANALYSIS...
+                </div>
                 <div className="dots">
                   <div className="dot1"></div>
                   <div className="dot2"></div>
@@ -40,16 +53,17 @@ function Analysis() {
                 <img src={Medium_Square} className="medium__square--analysis" />
                 <img src={Small_Square} className="small__square--analysis" />
                 <div className="scan__btn--wrapper">
-                  <div className="scan__btn">
+                  <button className="scan__btn" onClick={handleScanClick}>
                     <img src={camera_icon} />
-                  </div>
-                  <div className="scan__btn--description">
-                    <p>
-                      ALLOW A.I. <br />
-                      TO SCAN YOUR FACE
-                    </p>
-                    <img src={line} alt="" />
-                  </div>
+                    <input type="file" ref={scanInputRef} />
+                    <div className="scan__btn--description">
+                      <p>
+                        ALLOW A.I. <br />
+                        TO SCAN YOUR FACE
+                      </p>
+                      <img src={line} alt="" />
+                    </div>
+                  </button>
                 </div>
               </div>
               <div className="gallery">
@@ -57,22 +71,23 @@ function Analysis() {
                 <img src={Medium_Square} className="medium__square--analysis" />
                 <img src={Small_Square} className="small__square--analysis" />
                 <div className="gallery__btn--wrapper">
-                  <div className="gallery__btn">
+                  <button className="gallery__btn" onClick={handleGalleryClick}>
                     <img src={gallery_icon} alt="" />
-                  </div>
-                  <div className="gallery__btn--description">
-                    <p>
-                      ALLOW A.I <br />
-                      TO ACCESS GALLERY
-                    </p>
-                    <img src={line} alt="" />
-                  </div>
+                    <input type="file" ref={galleryInputRef} onChange={handleFileSelect}/>
+                    <div className="gallery__btn--description">
+                      <p>
+                        ALLOW A.I <br />
+                        TO ACCESS GALLERY
+                      </p>
+                      <img src={line} alt="" />
+                    </div>
+                  </button>
                 </div>
               </div>
               <div className="preview">
                 <div className="preview__title">Preview</div>
                 <div className="preview__picture--box">
-                    <img src={preview} alt="" />
+                  <img src={preview || null} alt="" className="preview__picture--box-img"/>
                 </div>
               </div>
             </>
