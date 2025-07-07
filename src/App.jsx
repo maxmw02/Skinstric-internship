@@ -59,10 +59,10 @@ function App() {
 
   const uploadImage = async () => {
     try {
-      const formData = new FormData()
-      formData.append('image', base64)
       const response = await axios.post(
-        "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo", formData, {
+        "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo", {
+          ImageData: base64
+        }, {
           headers: {
             'Content-Type' : 'multipart/form-data'
           }
