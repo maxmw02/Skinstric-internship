@@ -114,7 +114,7 @@ function Results() {
             <div className="back__btn--title">BACK</div>
           </div>
         </a>
-        <a href="/demographics" className="proceed__btn">
+        <a href="/demographics" className="get__summary--btn">
           <div className="proceed__btn--title">Get Summary</div>
           <div className="proceed__btn--border"></div>
           <div className="proceed__btn--triangle">▶</div>

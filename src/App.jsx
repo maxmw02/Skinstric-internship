@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import Home from "./Pages/Home";
 import AOS from "aos";
@@ -30,11 +30,15 @@ AOS.init({
   anchorPlacement: "top-bottom",
 });
 
+
 function App() {
+
     const [loading, setLoading] = useState(false);
     const [preview, setPreview] = useState("");
+    const [demoData, setDemoData] = useState([])
+    const [error, setError] = useState(false)
     const base64 = preview.split(",")[1];
-
+  
   const convertFileToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -44,35 +48,28 @@ function App() {
     });
   };
 
-  const handleFileSelect = async (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      try {
-        const base64String = await convertFileToBase64(file);
-        setPreview(base64String);
-        uploadImage()
-      } catch (error) {
-        console.error("Error converting file to Base64");
-      }
-    }
-  };
+
 
   const uploadImage = async () => {
+    setLoading(true)
     try {
-      const response = await axios.post(
-        "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo", {
-          ImageData: base64
-        }, {
-          headers: {
-            'Content-Type' : 'multipart/form-data'
-          }
-        }
+      const { data } = await axios.post(
+        "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
+
+        { image: base64 }, 
+
+        { headers: { "Content-Type": "application/json" } }
       );
-      console.log('Image upload success', response.data)
+      setError(false)
+      setDemoData(data)
+      console.log(data)
     } catch (error) {
-      console.error('Error uploading image', error)
+      setError(true)
+      setDemoData([])
+      console.error(error);
     }
-  }
+    setLoading(false)
+  };
 
   return (
     <div className="App">
@@ -80,9 +77,9 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="/intro" element={<Intro/>} />
-          <Route path="/analysis" element={<Analysis handleFileSelect={handleFileSelect} preview={preview} loading={loading} uploadImage={uploadImage}/>} />
+          <Route path="/analysis" element={<Analysis convertFileToBase64={convertFileToBase64} setPreview={setPreview} error={error} preview={preview} loading={loading} uploadImage={uploadImage}/>} />
           <Route path="/results" element={<Results />} />
-          <Route path="/demographics" element={<Demographics />} />
+          <Route path="/demographics" element={<Demographics demoData={demoData} />} />
         </Routes>
       </BrowserRouter>
     </div>

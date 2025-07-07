@@ -6,8 +6,9 @@ import radio_button_black from "../Assets/radio-button (1).png";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-function Demographics() {
+function Demographics({ demoData }) {
   const [percent, setPercent] = useState("33");
+  console.log(demoData)
   return (
     <>
       <Nav />
@@ -60,43 +61,8 @@ function Demographics() {
                   A.I. CONFIDENCE
                 </div>
               </div>
+              
               <div className="demo__confidence--options">
-                <div className="demo__confidence--option">
-                  <div className="demo__confidence--option-left">
-                    <img src={radio_button_black} alt="" />
-                    <div className="demo__confidence--option-title">
-                      Southeast Asian
-                    </div>
-                  </div>
-                  <div className="demo__confidence--option-right">33%</div>
-                </div>
-                <div className="demo__confidence--option">
-                  <div className="demo__confidence--option-left">
-                    <img src={radio_button_black} alt="" />
-                    <div className="demo__confidence--option-title">
-                      Southeast Asian
-                    </div>
-                  </div>
-                  <div className="demo__confidence--option-right">33%</div>
-                </div>
-                <div className="demo__confidence--option">
-                  <div className="demo__confidence--option-left">
-                    <img src={radio_button_black} alt="" />
-                    <div className="demo__confidence--option-title">
-                      Southeast Asian
-                    </div>
-                  </div>
-                  <div className="demo__confidence--option-right">33%</div>
-                </div>
-                <div className="demo__confidence--option">
-                  <div className="demo__confidence--option-left">
-                    <img src={radio_button_black} alt="" />
-                    <div className="demo__confidence--option-title">
-                      Southeast Asian
-                    </div>
-                  </div>
-                  <div className="demo__confidence--option-right">33%</div>
-                </div>
                 <div className="demo__confidence--option">
                   <div className="demo__confidence--option-left">
                     <img src={radio_button_black} alt="" />

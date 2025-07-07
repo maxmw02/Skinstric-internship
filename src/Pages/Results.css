@@ -89,3 +89,14 @@
   opacity: 0;
   transition: all 400ms ease;
 }
+
+.get__summary--btn {
+  position: relative;
+  display: flex;
+  border: none;
+  padding: 4px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}

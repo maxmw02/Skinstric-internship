@@ -7,13 +7,12 @@ import Small_Square from "../Assets/Rectangle 2778.png";
 import camera_icon from "../Assets/camera-icon.png";
 import gallery_icon from "../Assets/gallery-icon.png";
 import line from "../Assets/Group 39690.png";
+import { useNavigate } from "react-router-dom";
 
-function Analysis({ loading, preview, handleFileSelect, uploadImage}) {
+function Analysis({ convertFileToBase64, loading, preview, uploadImage, error, setPreview }) {
   const galleryInputRef = useRef(null)
   const scanInputRef = useRef(null)
-
-
-
+  const navigate = useNavigate()
 
   const handleGalleryClick = () => {
     galleryInputRef.current.click();
@@ -21,6 +20,18 @@ function Analysis({ loading, preview, handleFileSelect, uploadImage}) {
   const handleScanClick = () => {
     scanInputRef.current.click();
   }
+
+  const handleFileSelect = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      try {
+        const base64String = await convertFileToBase64(file);
+        setPreview(base64String);
+      } catch (error) {
+        console.error("Error converting file to Base64");
+      }
+    }
+  };
 
   return (
     <>
@@ -89,6 +100,12 @@ function Analysis({ loading, preview, handleFileSelect, uploadImage}) {
                 <div className="preview__picture--box">
                   <img src={preview || null} alt="" className="preview__picture--box-img"/>
                 </div>
+                <button onClick={() => {
+                  uploadImage()
+                  if (error === false) {
+                    navigate('/results')
+                  }
+                }}>Confirm</button>
               </div>
             </>
           )}
