@@ -3,6 +3,7 @@ import "./Results.css";
 import Nav from "../Components/Nav";
 
 import Small_Square from "../Assets/Rectangle 2778.png";
+import { Link } from "react-router-dom";
 
 function Results() {
   const [scale, setScale] = useState("");
@@ -19,7 +20,7 @@ function Results() {
           <div className="results__options--rotate">
             <div className="results__upper">
               <div className="results__option upper__option">
-                <a href="/demographics">
+                <Link to="/demographics">
                   <button
                     className="dark__gray dark__gray--hover scale--hover"
                     onMouseEnter={() => {
@@ -33,7 +34,7 @@ function Results() {
                   >
                     <span>DEMOGRAPHICS</span>
                   </button>
-                </a>
+                </Link>
               </div>
               <div className="results__option">
                 <a href="/">

@@ -7,7 +7,7 @@ import Intro from "./Pages/Intro";
 import Analysis from "./Pages/Analysis";
 import Results from "./Pages/Results";
 import Demographics from "./Pages/Demographics";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 AOS.init();
 
@@ -32,10 +32,9 @@ AOS.init({
 
 
 function App() {
-
     const [loading, setLoading] = useState(false);
     const [preview, setPreview] = useState("");
-    const [demoData, setDemoData] = useState([])
+    const [demoData, setDemoData] = useState({})
     const [error, setError] = useState(false)
     const base64 = preview.split(",")[1];
   
@@ -61,8 +60,7 @@ function App() {
         { headers: { "Content-Type": "application/json" } }
       );
       setError(false)
-      setDemoData(data)
-      console.log(data)
+      setDemoData(data.data)
     } catch (error) {
       setError(true)
       setDemoData([])
@@ -76,10 +74,25 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Home />} />
-          <Route path="/intro" element={<Intro/>} />
-          <Route path="/analysis" element={<Analysis convertFileToBase64={convertFileToBase64} setPreview={setPreview} error={error} preview={preview} loading={loading} uploadImage={uploadImage}/>} />
+          <Route path="/intro" element={<Intro />} />
+          <Route
+            path="/analysis"
+            element={
+              <Analysis
+                convertFileToBase64={convertFileToBase64}
+                setPreview={setPreview}
+                error={error}
+                preview={preview}
+                loading={loading}
+                uploadImage={uploadImage}
+              />
+            }
+          />
           <Route path="/results" element={<Results />} />
-          <Route path="/demographics" element={<Demographics demoData={demoData} />} />
+          <Route
+            path="/demographics"
+            element={<Demographics demoData={demoData} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

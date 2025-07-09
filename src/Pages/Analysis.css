@@ -194,3 +194,24 @@
   width: 128px;
   object-fit: scale-down;
 }
+
+.confirm__wrapper {
+  margin-top: 4px;
+  display: flex;
+}
+
+.confirm {
+  font-size: 14px; 
+  margin-right: 8px;
+}
+
+.preview button {
+  font-size: 14px;
+  background-color: transparent;
+  margin-right: 8px;
+  transition: all 200ms ease;
+}
+
+.preview button:hover {
+  transform: scale(1.1);
+}

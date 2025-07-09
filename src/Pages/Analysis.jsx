@@ -9,17 +9,25 @@ import gallery_icon from "../Assets/gallery-icon.png";
 import line from "../Assets/Group 39690.png";
 import { useNavigate } from "react-router-dom";
 
-function Analysis({ convertFileToBase64, loading, preview, uploadImage, error, setPreview }) {
-  const galleryInputRef = useRef(null)
-  const scanInputRef = useRef(null)
-  const navigate = useNavigate()
+function Analysis({
+  convertFileToBase64,
+  loading,
+  preview,
+  uploadImage,
+  error,
+  setPreview,
+}) {
+  const confirmImageRef = useRef(null);
+  const galleryInputRef = useRef(null);
+  const scanInputRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleGalleryClick = () => {
     galleryInputRef.current.click();
-  }
+  };
   const handleScanClick = () => {
     scanInputRef.current.click();
-  }
+  };
 
   const handleFileSelect = async (event) => {
     const file = event.target.files[0];
@@ -84,7 +92,11 @@ function Analysis({ convertFileToBase64, loading, preview, uploadImage, error, s
                 <div className="gallery__btn--wrapper">
                   <button className="gallery__btn" onClick={handleGalleryClick}>
                     <img src={gallery_icon} alt="" />
-                    <input type="file" ref={galleryInputRef} onChange={handleFileSelect}/>
+                    <input
+                      type="file"
+                      ref={galleryInputRef}
+                      onChange={handleFileSelect}
+                    />
                     <div className="gallery__btn--description">
                       <p>
                         ALLOW A.I <br />
@@ -98,14 +110,32 @@ function Analysis({ convertFileToBase64, loading, preview, uploadImage, error, s
               <div className="preview">
                 <div className="preview__title">Preview</div>
                 <div className="preview__picture--box">
-                  <img src={preview || null} alt="" className="preview__picture--box-img"/>
+                  <img
+                    src={preview || null}
+                    alt=""
+                    className="preview__picture--box-img"
+                  />
                 </div>
-                <button onClick={() => {
-                  uploadImage()
-                  if (error === false) {
-                    navigate('/results')
-                  }
-                }}>Confirm</button>
+                <div className="confirm__wrapper">
+                  <div className="confirm">Confirm?</div>
+                  <button
+                    onClick={() => {
+                      uploadImage();
+                      if (error === false) {
+                        navigate("/results");
+                      }
+                    }}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    onClick={() => {
+                      setPreview("");
+                    }}
+                  >
+                    No
+                  </button>
+                </div>
               </div>
             </>
           )}

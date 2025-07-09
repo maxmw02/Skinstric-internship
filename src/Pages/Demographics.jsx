@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Demographics.css";
 import Nav from "../Components/Nav";
 import radio_button from "../Assets/radio-button.png";
@@ -7,8 +7,31 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 function Demographics({ demoData }) {
-  const [percent, setPercent] = useState("33");
-  console.log(demoData)
+  const [percentRace, setPercentRace] = useState(null);
+  const [sortedRace, setSortedRace] = useState([]);
+  const [correctRace, setCorrectRace] = useState(null);
+
+  useEffect(() => {
+    const raceArray = Object.entries(demoData.race).map(
+      ([race, percentage]) => ({
+        race,
+        percentage,
+      })
+    );
+    const sorted = [...raceArray].sort((a, b) => {
+      return b.percentage - a.percentage;
+    });
+    setSortedRace(sorted);
+    setCorrectRace(
+      sorted[0].race.charAt(0).toUpperCase() + sorted[0].race.slice(1)
+    );
+    setPercentRace(Math.round(sorted[0].percentage * 100));
+  }, [demoData]);
+
+  useEffect(() => {
+    console.log(sortedRace);
+  }, [sortedRace]);
+
   return (
     <>
       <Nav />
@@ -21,38 +44,41 @@ function Demographics({ demoData }) {
           </div>
           <div className="demo__results">
             <div className="demo__correct--details">
-              <div className="demo__correct--detail">
-                <div className="demo__set--detail">Southeast asian</div>
+              <button className="demo__correct--detail">
+                <div className="demo__set--detail">{correctRace}</div>
                 <div className="demo__detail--title">RACE</div>
-              </div>
-              <div className="demo__correct--detail">
+              </button>
+              <button className="demo__correct--detail">
                 <div className="demo__set--detail">50-59</div>
                 <div className="demo__detail--title">AGE</div>
-              </div>
-              <div className="demo__correct--detail">
+              </button>
+              <button className="demo__correct--detail">
                 <div className="demo__set--detail">FEMALE</div>
                 <div className="demo__detail--title">SEX</div>
-              </div>
+              </button>
             </div>
             <div className="demo__displayed">
-              <div className="demo__displayed--title">Southeast asian</div>
+              <div className="demo__displayed--title">{correctRace}</div>
               <div className="demo__displayed--percent-wrapper">
                 <div className="demo__displayed--percent">
                   <CircularProgressbar
-                    value={percent}
-                    text={`${percent}%`}
+                    value={percentRace}
+                    text={`${percentRace}%`}
                     strokeWidth={1}
                     styles={buildStyles({
                       strokeLinecap: "butt",
                       textSize: "10px",
                       pathTransitionDuration: 0.5,
+                      pathTransition: "smooth",
                       pathColor: "#1a1b1c",
                       textColor: "#1a1b1c",
                     })}
                   />
                 </div>
               </div>
-              <div className="demo__estimate--wrong">If A.I. estimate is wrong, select the correct one.</div>
+              <div className="demo__estimate--wrong">
+                If A.I. estimate is wrong, select the correct one.
+              </div>
             </div>
             <div className="demo__confidence">
               <div className="demo__confidence--title">
@@ -61,17 +87,36 @@ function Demographics({ demoData }) {
                   A.I. CONFIDENCE
                 </div>
               </div>
-              
+
               <div className="demo__confidence--options">
-                <div className="demo__confidence--option">
-                  <div className="demo__confidence--option-left">
-                    <img src={radio_button_black} alt="" />
-                    <div className="demo__confidence--option-title">
-                      Southeast Asian
+                {sortedRace.map((race) => (
+                  <button
+                    className="demo__confidence--option"
+                    key={race.percentage}
+                    onClick={() => {
+                      setCorrectRace(
+                        `${
+                          race.race.charAt(0).toUpperCase() + race.race.slice(1)
+                        }`
+                      );
+                      setPercentRace(Math.round(race.percentage * 100));
+                    }}
+                  >
+                    <div className="demo__confidence--option-left">
+                      {correctRace === race.race ? (
+                        <img src={radio_button} alt="" />
+                      ) : (
+                        <img src={radio_button_black} alt="" />
+                      )}
+                      <div className="demo__confidence--option-title">
+                        {race.race.charAt(0).toUpperCase() + race.race.slice(1)}
+                      </div>
                     </div>
-                  </div>
-                  <div className="demo__confidence--option-right">33%</div>
-                </div>
+                    <div className="demo__confidence--option-right">
+                      {Math.round(race.percentage * 100)}%
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
           </div>

@@ -48,17 +48,25 @@
     flex-direction: column;
     justify-content: space-between;
     height: 150px;
+    width: 100%;
     padding: 12px;
+    text-align: start;
     margin-bottom: 12px;
     border-top: 1px solid #1a1b1c;
     background-color: #f3f3f4;
 }
 
+.demo__correct--detail:hover {
+    background-color: #d2d2dade;
+}
+
 .demo__set--detail {
+    font-size: 16px;
     font-weight: 700;
 }
 
 .demo__detail--title {
+    font-size: 16px;
     font-weight: 700;
 }
 
@@ -119,11 +127,17 @@
 }
 
 .demo__confidence--option {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 16px;
     height: 48px;
+    background-color: #f3f3f4;
+}
+
+.demo__confidence--option:hover {
+    background-color: #d2d2dade;
 }
 
 .demo__confidence--option-left {
@@ -132,9 +146,19 @@
     align-items: center;
 }
 
+.demo__confidence--option-title {
+    font-size: 16px;
+    text-align: start;
+}
+
 .demo__confidence--option-left img {
     height: 12px;
     margin-right: 10px;
+}
+
+.demo__confidence--option-right {
+    margin-left: 8px;
+    font-size: 16px;
 }
 
 .demo__btns {
