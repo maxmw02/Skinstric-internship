@@ -14,13 +14,11 @@ function Analysis({
   loading,
   preview,
   uploadImage,
-  error,
   setPreview,
 }) {
   const confirmImageRef = useRef(null);
   const galleryInputRef = useRef(null);
   const scanInputRef = useRef(null);
-  const navigate = useNavigate();
 
   const handleGalleryClick = () => {
     galleryInputRef.current.click();
@@ -28,6 +26,9 @@ function Analysis({
   const handleScanClick = () => {
     scanInputRef.current.click();
   };
+  const handleConfirm = () => {
+    confirmImageRef.current.click()
+  }
 
   const handleFileSelect = async (event) => {
     const file = event.target.files[0];
@@ -35,6 +36,7 @@ function Analysis({
       try {
         const base64String = await convertFileToBase64(file);
         setPreview(base64String);
+        handleConfirm()
       } catch (error) {
         console.error("Error converting file to Base64");
       }
@@ -50,21 +52,43 @@ function Analysis({
         </div>
         <div className="picture__wrapper">
           {loading ? (
-            <div className="analysis__loading">
-              <div className="loading__wrapper">
-                <div className="analysis__loading--title">
-                  PREPARING YOUR ANALYSIS...
+            <>
+              <div className="analysis__loading">
+                <div className="loading__wrapper">
+                  <div className="analysis__loading--title">
+                    PREPARING YOUR ANALYSIS...
+                  </div>
+                  <div className="dots">
+                    <div className="dot1"></div>
+                    <div className="dot2"></div>
+                    <div className="dot3"></div>
+                  </div>
                 </div>
-                <div className="dots">
-                  <div className="dot1"></div>
-                  <div className="dot2"></div>
-                  <div className="dot3"></div>
+                <img src={Big_Square} className="big__square--loading" />
+                <img src={Medium_Square} className="medium__square--loading" />
+                <img src={Small_Square} className="small__square--loading" />
+              </div>
+              <div className="preview">
+                <div className="preview__title">Preview</div>
+                <div className="preview__picture--box">
+                  <img
+                    src={preview || null}
+                    alt=""
+                    className="preview__picture--box-img"
+                  />
+                </div>
+                <div className="confirm__wrapper">
+                  <button
+                    ref={confirmImageRef}
+                    onClick={() => {
+                      uploadImage();
+                    }}
+                  >
+                    Confirm
+                  </button>
                 </div>
               </div>
-              <img src={Big_Square} className="big__square--loading" />
-              <img src={Medium_Square} className="medium__square--loading" />
-              <img src={Small_Square} className="small__square--loading" />
-            </div>
+            </>
           ) : (
             <>
               <div className="scan">
@@ -117,23 +141,13 @@ function Analysis({
                   />
                 </div>
                 <div className="confirm__wrapper">
-                  <div className="confirm">Confirm?</div>
                   <button
+                    ref={confirmImageRef}
                     onClick={() => {
                       uploadImage();
-                      if (error === false) {
-                        navigate("/results");
-                      }
                     }}
                   >
-                    Yes
-                  </button>
-                  <button
-                    onClick={() => {
-                      setPreview("");
-                    }}
-                  >
-                    No
+                    Confirm
                   </button>
                 </div>
               </div>

@@ -35,8 +35,9 @@ function App() {
     const [loading, setLoading] = useState(false);
     const [preview, setPreview] = useState("");
     const [demoData, setDemoData] = useState({})
-    const [error, setError] = useState(false)
+
     const base64 = preview.split(",")[1];
+    const navigate = useNavigate()
   
   const convertFileToBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -59,10 +60,11 @@ function App() {
 
         { headers: { "Content-Type": "application/json" } }
       );
-      setError(false)
+
       setDemoData(data.data)
+      window.alert('Image analyzed successfully!')
+      navigate("/results")
     } catch (error) {
-      setError(true)
       setDemoData([])
       console.error(error);
     }
@@ -71,7 +73,7 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+   
         <Routes>
           <Route index element={<Home />} />
           <Route path="/intro" element={<Intro />} />
@@ -81,7 +83,7 @@ function App() {
               <Analysis
                 convertFileToBase64={convertFileToBase64}
                 setPreview={setPreview}
-                error={error}
+            
                 preview={preview}
                 loading={loading}
                 uploadImage={uploadImage}
@@ -94,7 +96,7 @@ function App() {
             element={<Demographics demoData={demoData} />}
           />
         </Routes>
-      </BrowserRouter>
+
     </div>
   );
 }
