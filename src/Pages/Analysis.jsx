@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Analysis.css";
 import Nav from "../Components/Nav";
 import Big_Square from "../Assets/Rectangle 2780.png";
@@ -7,7 +7,6 @@ import Small_Square from "../Assets/Rectangle 2778.png";
 import camera_icon from "../Assets/camera-icon.png";
 import gallery_icon from "../Assets/gallery-icon.png";
 import line from "../Assets/Group 39690.png";
-import { useNavigate } from "react-router-dom";
 
 function Analysis({
   convertFileToBase64,
@@ -16,7 +15,6 @@ function Analysis({
   uploadImage,
   setPreview,
 }) {
-  const confirmImageRef = useRef(null);
   const galleryInputRef = useRef(null);
   const scanInputRef = useRef(null);
 
@@ -26,22 +24,26 @@ function Analysis({
   const handleScanClick = () => {
     scanInputRef.current.click();
   };
-  const handleConfirm = () => {
-    confirmImageRef.current.click()
-  }
 
-  const handleFileSelect = async (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      try {
-        const base64String = await convertFileToBase64(file);
-        setPreview(base64String);
-        handleConfirm()
-      } catch (error) {
-        console.error("Error converting file to Base64");
-      }
+  const handleFileSelect = async (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    try {
+      const base64 = await convertFileToBase64(file);
+
+      setPreview(base64);
+    } catch {
+      console.error("Error converting file");
     }
   };
+
+  useEffect(() => {
+    if (!preview) return;
+
+    uploadImage();
+  }, [preview]);
 
   return (
     <>
@@ -76,16 +78,6 @@ function Analysis({
                     alt=""
                     className="preview__picture--box-img"
                   />
-                </div>
-                <div className="confirm__wrapper">
-                  <button
-                    ref={confirmImageRef}
-                    onClick={() => {
-                      uploadImage();
-                    }}
-                  >
-                    Confirm
-                  </button>
                 </div>
               </div>
             </>
@@ -139,16 +131,6 @@ function Analysis({
                     alt=""
                     className="preview__picture--box-img"
                   />
-                </div>
-                <div className="confirm__wrapper">
-                  <button
-                    ref={confirmImageRef}
-                    onClick={() => {
-                      uploadImage();
-                    }}
-                  >
-                    Confirm
-                  </button>
                 </div>
               </div>
             </>

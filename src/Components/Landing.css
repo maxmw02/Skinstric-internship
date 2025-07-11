@@ -2,8 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 90vh;
-    
+    overflow: hidden;
+    min-height: 90vh;  
 }
 
 .landing__heading h1 {
@@ -109,7 +109,7 @@
     transform: none;
     position: absolute;
     right: 18px;
-    top: 18px;
+    top: 15px;
     transition: all 200ms ease;
 }
 

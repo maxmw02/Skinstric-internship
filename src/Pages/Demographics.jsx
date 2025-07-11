@@ -17,7 +17,7 @@ function Demographics({ demoData }) {
   const [percentGender, setPercentGender] = useState(null);
   const [sortedGender, setSortedGender] = useState([]);
   const [correctGender, setCorrectGender] = useState(null);
-
+  const [displayedPercent, setDisplayedPercent] = useState(null)
 
   useEffect(() => {
     const raceArray = Object.entries(demoData.race).map(
@@ -34,16 +34,14 @@ function Demographics({ demoData }) {
       sorted[0].race.charAt(0).toUpperCase() + sorted[0].race.slice(1)
     );
     setPercentRace(Math.round(sorted[0].percentage * 100));
-    console.log(demoData)
+    console.log(demoData);
   }, [demoData]);
 
   useEffect(() => {
-    const ageArray = Object.entries(demoData.age).map(
-      ([age, percentage]) => ({
-        age,
-        percentage,
-      })
-    );
+    const ageArray = Object.entries(demoData.age).map(([age, percentage]) => ({
+      age,
+      percentage,
+    }));
     const sorted = [...ageArray].sort((a, b) => {
       return b.percentage - a.percentage;
     });
@@ -71,6 +69,18 @@ function Demographics({ demoData }) {
     setPercentGender(Math.round(sorted[0].percentage * 100));
   }, [demoData]);
 
+  useEffect(() => {
+    setDisplayedPercent(percentRace)
+  }, [percentRace])
+
+  useEffect(() => {
+    setDisplayedPercent(percentAge)
+  }, [percentAge])
+
+  useEffect(() => {
+    setDisplayedPercent(percentGender)
+  }, [percentGender])
+
   return (
     <>
       <Nav />
@@ -87,6 +97,7 @@ function Demographics({ demoData }) {
                 className="demo__correct--detail"
                 onClick={() => {
                   setSelectedDemo("race");
+                  setDisplayedPercent(percentRace)
                 }}
                 style={{
                   backgroundColor:
@@ -114,6 +125,7 @@ function Demographics({ demoData }) {
                 className="demo__correct--detail"
                 onClick={() => {
                   setSelectedDemo("age");
+                  setDisplayedPercent(percentAge)
                 }}
                 style={{
                   backgroundColor:
@@ -141,6 +153,7 @@ function Demographics({ demoData }) {
                 className="demo__correct--detail"
                 onClick={() => {
                   setSelectedDemo("sex");
+                  setDisplayedPercent(percentGender)
                 }}
                 style={{
                   backgroundColor:
@@ -165,78 +178,33 @@ function Demographics({ demoData }) {
                 </div>
               </button>
             </div>
-            {selectedDemo === "race" && (
-              <div className="demo__displayed">
-                <div className="demo__displayed--title">{correctRace}</div>
-                <div className="demo__displayed--percent-wrapper">
-                  <div className="demo__displayed--percent">
-                    <CircularProgressbar
-                      value={percentRace}
-                      text={`${percentRace}%`}
-                      strokeWidth={2}
-                      styles={buildStyles({
-                        strokeLinecap: "butt",
-                        textSize: "10px",
-                        pathTransition: "transform 2s ease-in-out;",
-                        pathColor: "#1a1b1c",
-                        textColor: "#1a1b1c",
-                      })}
-                    />
-                  </div>
-                </div>
-                <div className="demo__estimate--wrong">
-                  If A.I. estimate is wrong, select the correct one.
+
+            <div className="demo__displayed">
+              <div className="demo__displayed--title">
+                {selectedDemo === "race" && correctRace}
+                {selectedDemo === "age" && correctAge}
+                {selectedDemo === "sex" && correctGender}
+              </div>
+              <div className="demo__displayed--percent-wrapper">
+                <div className="demo__displayed--percent">
+                  <CircularProgressbar
+                    value={displayedPercent}
+                    text={`${displayedPercent}%`}
+                    strokeWidth={2}
+                    styles={buildStyles({
+                      strokeLinecap: "butt",
+                      textSize: "10px",
+                      transition: "transform 2s ease-in-out",
+                      pathColor: "#1a1b1c",
+                      textColor: "#1a1b1c",
+                    })}
+                  />
                 </div>
               </div>
-            )}
-            {selectedDemo === "age" && (
-              <div className="demo__displayed">
-                <div className="demo__displayed--title">{correctAge}</div>
-                <div className="demo__displayed--percent-wrapper">
-                  <div className="demo__displayed--percent">
-                    <CircularProgressbar
-                      value={percentAge}
-                      text={`${percentAge}%`}
-                      strokeWidth={2}
-                      styles={buildStyles({
-                        strokeLinecap: "butt",
-                        textSize: "10px",
-                        pathTransition: "transform 2s ease-in-out;",
-                        pathColor: "#1a1b1c",
-                        textColor: "#1a1b1c",
-                      })}
-                    />
-                  </div>
-                </div>
-                <div className="demo__estimate--wrong">
-                  If A.I. estimate is wrong, select the correct one.
-                </div>
+              <div className="demo__estimate--wrong">
+                If A.I. estimate is wrong, select the correct one.
               </div>
-            )}
-            {selectedDemo === "sex" && (
-              <div className="demo__displayed">
-                <div className="demo__displayed--title">{correctGender}</div>
-                <div className="demo__displayed--percent-wrapper">
-                  <div className="demo__displayed--percent">
-                    <CircularProgressbar
-                      value={percentGender}
-                      text={`${percentGender}%`}
-                      strokeWidth={2}
-                      styles={buildStyles({
-                        strokeLinecap: "butt",
-                        textSize: "10px",
-                        pathTransition: "transform 2s ease-in-out;",
-                        pathColor: "#1a1b1c",
-                        textColor: "#1a1b1c",
-                      })}
-                    />
-                  </div>
-                </div>
-                <div className="demo__estimate--wrong">
-                  If A.I. estimate is wrong, select the correct one.
-                </div>
-              </div>
-            )}
+            </div>
             <div className="demo__confidence">
               <div className="demo__confidence--title">
                 <div className="demo__confidence--title-demo">RACE</div>
