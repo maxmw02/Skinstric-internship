@@ -7,7 +7,11 @@ import { Link } from "react-router-dom";
 
 function Results() {
   const [scale, setScale] = useState("");
+  const [bigScale, setBigScale] = useState("")
+  const [biggerScale, setBiggerScale] = useState("")
   const [opacity, setOpacity] = useState("");
+  const [bigOpacity, setBigOpacity] = useState("");
+  const [biggerOpacity, setBiggerOpacity] = useState("");
   return (
     <>
       <Nav />
@@ -41,12 +45,12 @@ function Results() {
                   <button
                     className="light__gray dark__gray--hover no-pointer"
                     onMouseEnter={() => {
-                      setScale("1.15");
-                      setOpacity("1");
+                      setBigScale("1.15");
+                      setBigOpacity("1");
                     }}
                     onMouseLeave={() => {
-                      setScale("0");
-                      setOpacity("0");
+                      setBigScale("0");
+                      setBigOpacity("0");
                     }}
                   >
                     <span>
@@ -63,12 +67,12 @@ function Results() {
                   <button
                     className="light__gray dark__gray--hover no-pointer"
                     onMouseEnter={() => {
-                      setScale("1.15");
-                      setOpacity("1");
+                      setBigScale("1.15");
+                      setBigOpacity("1");
                     }}
                     onMouseLeave={() => {
-                      setScale("0");
-                      setOpacity("0");
+                      setBigScale("0");
+                      setBigOpacity("0");
                     }}
                   >
                     <span>SKIN TYPE DETAILS</span>
@@ -80,12 +84,12 @@ function Results() {
                   <button
                     className="light__gray dark__gray--hover no-pointer"
                     onMouseEnter={() => {
-                      setScale("1.2");
-                      setOpacity("1");
+                      setBiggerScale("1.2");
+                      setBiggerOpacity("1");
                     }}
                     onMouseLeave={() => {
-                      setScale("0");
-                      setOpacity("0");
+                      setBiggerScale("0");
+                      setBiggerOpacity("0");
                     }}
                   >
                     <span>WEATHER</span>
@@ -103,6 +107,22 @@ function Results() {
             opacity: opacity,
           }}
         />
+        <img
+          src={Small_Square}
+          className="small__square--results"
+          style={{
+            scale: bigScale,
+            opacity: bigOpacity,
+          }}
+        />
+        <img
+          src={Small_Square}
+          className="small__square--results"
+          style={{
+            scale: biggerScale,
+            opacity: biggerOpacity,
+          }}
+        />
       </div>
       <div className="intro__btns">
         <a href="/analysis">
@@ -116,7 +136,7 @@ function Results() {
           </div>
         </a>
         <a href="/demographics" className="get__summary--btn">
-          <div className="proceed__btn--title">Get Summary</div>
+          <div className="proceed__btn--title">GET SUMMARY</div>
           <div className="proceed__btn--border"></div>
           <div className="proceed__btn--triangle">▶</div>
         </a>

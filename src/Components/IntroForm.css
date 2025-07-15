@@ -88,7 +88,6 @@
 
 .error__wrapper {
   margin-top: 4px;
-
 }
 .error__wrapper p {
   color: red;
@@ -120,7 +119,6 @@
   background-color: #99a1af;
   border-radius: 50px;
   animation: bounce 2s ease infinite;
- 
 }
 .dot2 {
   height: 10px;
@@ -162,7 +160,7 @@
 
 .proceed__title {
   font-size: 24px;
-  color: #1A1B1C;
+  color: #1a1b1c;
   margin-bottom: 24px;
 }
 
@@ -197,83 +195,83 @@
 }
 
 .back__btn {
-    position: relative;
-    display: flex;
-    border: none;
-    padding: 4px 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
+  position: relative;
+  display: flex;
+  border: none;
+  padding: 4px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
 }
 .back__btn:hover .back__btn--border {
-    scale: 1.1;
+  scale: 1.1;
 }
 .back__btn:hover .back__btn--triangle {
-    scale: 1.1;
+  scale: 1.1;
 }
 
 .back__btn--border {
-    height: 42px;
-    width: 42px;
-    border: 1px solid #1A1B1C;
-    transform: rotate(45deg);
-    transition: all 200ms ease;
+  height: 42px;
+  width: 42px;
+  border: 1px solid #1a1b1c;
+  transform: rotate(45deg);
+  transition: all 200ms ease;
 }
 
 .back__btn--triangle {
-    transform: rotate(180deg);
-    position: absolute;
-    left: 24px;
-    top: 16px;
-    transition: all 200ms ease;
+  transform: rotate(180deg);
+  position: absolute;
+  left: 24px;
+  top: 16px;
+  transition: all 200ms ease;
 }
 
 .back__btn--title {
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: -2%;
-    margin-left: 25px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -2%;
+  margin-left: 25px;
 }
 
 .proceed__btn {
-    position: relative;
-    display: flex;
-    border: none;
-    padding: 4px 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-    animation: slideBounce 1800ms ease;
+  position: relative;
+  display: flex;
+  border: none;
+  padding: 4px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  animation: slideBounce 1800ms ease;
 }
 .proceed__btn:hover .proceed__btn--border {
-    scale: 1.1;
+  scale: 1.1;
 }
 .proceed__btn:hover .proceed__btn--triangle {
-    scale: 1.1;
+  scale: 1.1;
 }
 
 .proceed__btn--border {
-    height: 42px;
-    width: 42px;
-    border: 1px solid #1A1B1C;
-    transform: rotate(45deg);
-    transition: all 200ms ease;
+  height: 42px;
+  width: 42px;
+  border: 1px solid #1a1b1c;
+  transform: rotate(45deg);
+  transition: all 200ms ease;
 }
 
 .proceed__btn--triangle {
-    position: absolute;
-    right: 24px;
-    top: 15px;
-    transition: all 200ms ease;
+  position: absolute;
+  right: 24px;
+  top: 15px;
+  transition: all 200ms ease;
 }
 
 .proceed__btn--title {
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: -2%;
-    margin-right: 25px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -2%;
+  margin-right: 25px;
 }
 
 @keyframes slideBounce {
@@ -298,5 +296,33 @@
   }
   100% {
     transform: translate(0, 0);
+  }
+}
+
+@media (max-width: 700px) {
+  .big__square {
+    scale: 0.8;
+  }
+  .medium__square {
+    scale: 0.8;
+  }
+  .small__square {
+    scale: 0.8;
+  }
+}
+
+@media (max-width: 550px) {
+  .intro__forms input {
+    font-size: 46px;
+    width: 370px;
+  }
+  .big__square {
+    scale: 0.6;
+  }
+  .medium__square {
+    scale: 0.6;
+  }
+  .small__square {
+    scale: 0.6;
   }
 }

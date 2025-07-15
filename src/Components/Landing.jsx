@@ -33,6 +33,15 @@ function Landing() {
           <br />
           WHAT YOUR SKIN NEEDS.
         </div>
+        <a className="small__landing--btn" href="/intro">
+          <span className="small__landing--btn-name">ENTER EXPERIENCE</span>
+          <div className="small__landing--btn-border"></div>
+          <span className="small__landing--triangle">▶</span>
+        </a>
+        <div className="small__landing--squares">
+          <div className="outer__landing--square"></div>
+          <div className="inner__landing--square"></div>
+        </div>
         <div
           className="left__section"
           style={{ opacity: testHover ? "0" : "1" }}

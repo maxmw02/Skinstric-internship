@@ -158,9 +158,6 @@ function IntroForm() {
       </div>
       <div className="intro__btns">
         <a href="/">
-          <div className="back__btn--small">
-            <p>BACK</p>
-          </div>
           <div className="back__btn">
             <div className="back__btn--border"></div>
             <div className="back__btn--triangle">▶</div>
