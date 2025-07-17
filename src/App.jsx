@@ -7,7 +7,8 @@ import Intro from "./Pages/Intro";
 import Analysis from "./Pages/Analysis";
 import Results from "./Pages/Results";
 import Demographics from "./Pages/Demographics";
-import { useRef, useState } from "react";
+import Camera from './Pages/Camera'
+import { useState } from "react";
 import axios from "axios";
 AOS.init();
 
@@ -95,6 +96,7 @@ function App() {
             path="/demographics"
             element={<Demographics demoData={demoData} />}
           />
+          <Route path="/camera" element={<Camera setPreview={setPreview} preview={preview} uploadImage={uploadImage}/>} />
         </Routes>
 
     </div>
