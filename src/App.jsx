@@ -7,8 +7,8 @@ import Intro from "./Pages/Intro";
 import Analysis from "./Pages/Analysis";
 import Results from "./Pages/Results";
 import Demographics from "./Pages/Demographics";
-import Camera from './Pages/Camera'
-import { useState } from "react";
+import Camera from "./Pages/Camera";
+import { useState, useEffect } from "react"; // Import useEffect
 import axios from "axios";
 AOS.init();
 
@@ -31,15 +31,16 @@ AOS.init({
   anchorPlacement: "top-bottom",
 });
 
-
 function App() {
-    const [loading, setLoading] = useState(false);
-    const [preview, setPreview] = useState("");
-    const [demoData, setDemoData] = useState({})
+  const [loading, setLoading] = useState(false);
+  const [preview, setPreview] = useState("");
+  const [demoData, setDemoData] = useState(() => {
+    const savedDemoData = localStorage.getItem("demoData");
+    return savedDemoData ? JSON.parse(savedDemoData) : {};
+  });
+  const base64 = preview.split(",")[1];
+  const navigate = useNavigate();
 
-    const base64 = preview.split(",")[1];
-    const navigate = useNavigate()
-  
   const convertFileToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -49,56 +50,62 @@ function App() {
     });
   };
 
-
-
   const uploadImage = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const { data } = await axios.post(
         "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
-
-        { image: base64 }, 
-
+        { image: base64 },
         { headers: { "Content-Type": "application/json" } }
       );
 
-      setDemoData(data.data)
-      window.alert('Image analyzed successfully!')
-      navigate("/results")
+      setDemoData(data.data);
+   
+      localStorage.setItem("demoData", JSON.stringify(data.data));
+      window.alert("Image analyzed successfully!");
+      navigate("/results");
     } catch (error) {
-      setDemoData([])
+      setDemoData({}); 
+      localStorage.removeItem("demoData"); 
       console.error(error);
+      window.alert("Error analyzing image. Please try again."); 
     }
-    setLoading(false)
+    setLoading(false);
   };
 
   return (
     <div className="App">
-   
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="/intro" element={<Intro />} />
-          <Route
-            path="/analysis"
-            element={
-              <Analysis
-                convertFileToBase64={convertFileToBase64}
-                setPreview={setPreview}
-            
-                preview={preview}
-                loading={loading}
-                uploadImage={uploadImage}
-              />
-            }
-          />
-          <Route path="/results" element={<Results />} />
-          <Route
-            path="/demographics"
-            element={<Demographics demoData={demoData} />}
-          />
-          <Route path="/camera" element={<Camera setPreview={setPreview} preview={preview} uploadImage={uploadImage}/>} />
-        </Routes>
-
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/intro" element={<Intro />} />
+        <Route
+          path="/analysis"
+          element={
+            <Analysis
+              convertFileToBase64={convertFileToBase64}
+              setPreview={setPreview}
+              preview={preview}
+              loading={loading}
+              uploadImage={uploadImage}
+            />
+          }
+        />
+        <Route path="/results" element={<Results />} />
+        <Route
+          path="/demographics"
+          element={<Demographics demoData={demoData} />}
+        />
+        <Route
+          path="/camera"
+          element={
+            <Camera
+              setPreview={setPreview}
+              preview={preview}
+              uploadImage={uploadImage}
+            />
+          }
+        />
+      </Routes>
     </div>
   );
 }
