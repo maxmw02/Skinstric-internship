@@ -6,6 +6,7 @@
   margin: 0;
   font-family: "Inter";
   color: #1a1b1c;
+  font-variant-emoji: text;
 }
 
 a {
