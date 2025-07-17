@@ -201,6 +201,42 @@
   display: none;
 }
 
+.access__wrapper {
+  padding: 16px 0 8px 0;
+  position: absolute;
+  width: 350px;
+  background-color: #1a1b1cef;
+  
+}
+
+.access__wrapper h2 {
+  font-size: 16px;
+  color: #fcfcfc;
+  margin-bottom: 48px;
+  z-index: 50;
+  padding-left: 16px;
+}
+
+.access__buttons {
+  display: flex;
+  justify-content: end;
+  padding-top: 6px;
+  border-top: 1px solid #fcfcfc;
+}
+
+.deny {
+  color: #fcfcfca1;
+  background-color: transparent;
+  padding: 4px 12px;
+  margin-right: 16px;
+}
+
+.allow {
+  color: #fcfcfc;
+  background-color: transparent;
+  padding: 4px 12px;
+}
+
 @media (max-width: 900px) {
   .picture__wrapper {
     flex-direction: column;

@@ -7,6 +7,7 @@ import Small_Square from "../Assets/Rectangle 2778.png";
 import camera_icon from "../Assets/camera-icon.png";
 import gallery_icon from "../Assets/gallery-icon.png";
 import line from "../Assets/Group 39690.png";
+import { useNavigate } from "react-router-dom";
 
 function Analysis({
   convertFileToBase64,
@@ -15,15 +16,14 @@ function Analysis({
   uploadImage,
   setPreview,
 }) {
+  const [visible, setVisible] = useState('none')
   const galleryInputRef = useRef(null);
-  const scanInputRef = useRef(null);
+  const navigate = useNavigate()
 
   const handleGalleryClick = () => {
     galleryInputRef.current.click();
   };
-  const handleScanClick = () => {
-    scanInputRef.current.click();
-  };
+
 
   const handleFileSelect = async (e) => {
     const file = e.target.files[0];
@@ -88,9 +88,10 @@ function Analysis({
                 <img src={Medium_Square} className="medium__square--analysis" />
                 <img src={Small_Square} className="small__square--analysis" />
                 <div className="scan__btn--wrapper">
-                  <button className="scan__btn" onClick={handleScanClick}>
+                  <button className="scan__btn" onClick={() => {
+                    setVisible('block')
+                  }}>
                     <img src={camera_icon} />
-                    <input type="file" ref={scanInputRef} />
                     <div className="scan__btn--description">
                       <p>
                         ALLOW A.I. <br />
@@ -99,6 +100,17 @@ function Analysis({
                       <img src={line} alt="" />
                     </div>
                   </button>
+                    <div className="access__wrapper" style={{display: visible}}>
+                      <h2>ALLOW A.I. TO ACCESS YOUR CAMERA</h2>
+                      <div className="access__buttons">
+                        <button className="deny" onClick={() => {
+                          setVisible('none')
+                        }}>DENY</button>
+                        <button className="allow" onClick={() => {
+                          navigate('/camera')
+                        }}>ALLOW</button>
+                      </div>
+                    </div>
                 </div>
               </div>
               <div className="gallery">
@@ -106,7 +118,10 @@ function Analysis({
                 <img src={Medium_Square} className="medium__square--analysis" />
                 <img src={Small_Square} className="small__square--analysis" />
                 <div className="gallery__btn--wrapper">
-                  <button className="gallery__btn" onClick={handleGalleryClick}>
+                  <button className="gallery__btn" onClick={() => {
+                    setVisible('none')
+                    handleGalleryClick();
+                  }}>
                     <img src={gallery_icon} alt="" />
                     <input
                       type="file"
