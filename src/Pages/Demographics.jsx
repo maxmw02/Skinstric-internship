@@ -138,14 +138,14 @@ function Demographics({ demoData }) {
                   </div>
                   <div className="back__btn">
                     <div className="back__btn--border"></div>
-                    <div className="back__btn--triangle">▶</div>
+                    <div className="back__btn--triangle">▶{"\uFE0E"}</div>
                     <div className="back__btn--title">BACK</div>
                   </div>
                 </a>
                 <a href="/" className="home__btn">
                   <div className="proceed__btn--title">HOME</div>
                   <div className="proceed__btn--border"></div>
-                  <div className="proceed__btn--triangle">▶</div>
+                  <div className="proceed__btn--triangle">▶{"\uFE0E"}</div>
                 </a>
               </div>
             </div>
@@ -290,53 +290,40 @@ function Demographics({ demoData }) {
                   A.I. CONFIDENCE
                 </div>
               </div>
-              {selectedDemo === "race" &&
-                sortedRace.length > 0 && (
-                  <div className="demo__confidence--options">
-                    {sortedRace.map((race) => {
-                      const capitalizedRaceName =
-                        race.race.charAt(0).toUpperCase() + race.race.slice(1);
-                      return (
-                        <button
-                          className="demo__confidence--option"
-                          key={race.race + race.percentage}
-                          onClick={() => {
-                            setCorrectRace(capitalizedRaceName);
-                            setPercentRace(Math.round(race.percentage * 100));
-                          }}
-                          style={{
-                            backgroundColor:
-                              correctRace === capitalizedRaceName
-                                ? "#1a1b1c"
-                                : "#f3f3f4",
-                          }}
-                        >
-                          <div className="demo__confidence--option-left">
-                            {correctRace === capitalizedRaceName ? (
-                              <img
-                                src={radio_button}
-                                alt="Selected Radio Button"
-                              />
-                            ) : (
-                              <img
-                                src={radio_button_black}
-                                alt="Unselected Radio Button"
-                              />
-                            )}
-                            <div
-                              className="demo__confidence--option-title"
-                              style={{
-                                color:
-                                  correctRace === capitalizedRaceName
-                                    ? "#fff"
-                                    : "#1a1b1c",
-                              }}
-                            >
-                              {capitalizedRaceName}
-                            </div>
-                          </div>
+              {selectedDemo === "race" && sortedRace.length > 0 && (
+                <div className="demo__confidence--options">
+                  {sortedRace.map((race) => {
+                    const capitalizedRaceName =
+                      race.race.charAt(0).toUpperCase() + race.race.slice(1);
+                    return (
+                      <button
+                        className="demo__confidence--option"
+                        key={race.race + race.percentage}
+                        onClick={() => {
+                          setCorrectRace(capitalizedRaceName);
+                          setPercentRace(Math.round(race.percentage * 100));
+                        }}
+                        style={{
+                          backgroundColor:
+                            correctRace === capitalizedRaceName
+                              ? "#1a1b1c"
+                              : "#f3f3f4",
+                        }}
+                      >
+                        <div className="demo__confidence--option-left">
+                          {correctRace === capitalizedRaceName ? (
+                            <img
+                              src={radio_button}
+                              alt="Selected Radio Button"
+                            />
+                          ) : (
+                            <img
+                              src={radio_button_black}
+                              alt="Unselected Radio Button"
+                            />
+                          )}
                           <div
-                            className="demo__confidence--option-right"
+                            className="demo__confidence--option-title"
                             style={{
                               color:
                                 correctRace === capitalizedRaceName
@@ -344,60 +331,59 @@ function Demographics({ demoData }) {
                                   : "#1a1b1c",
                             }}
                           >
-                            {Math.round(race.percentage * 100)}%
+                            {capitalizedRaceName}
                           </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-              {selectedDemo === "age" &&
-                sortedAge.length > 0 && (
-                  <div className="demo__confidence--options">
-                    {sortedAge.map((age) => {
-                      const capitalizedAgeName =
-                        age.age.charAt(0).toUpperCase() + age.age.slice(1);
-                      return (
-                        <button
-                          className="demo__confidence--option"
-                          key={age.age + age.percentage}
-                          onClick={() => {
-                            setCorrectAge(capitalizedAgeName);
-                            setPercentAge(Math.round(age.percentage * 100));
-                          }}
+                        </div>
+                        <div
+                          className="demo__confidence--option-right"
                           style={{
-                            backgroundColor:
-                              correctAge === capitalizedAgeName
-                                ? "#1a1b1c"
-                                : "#f3f3f4",
+                            color:
+                              correctRace === capitalizedRaceName
+                                ? "#fff"
+                                : "#1a1b1c",
                           }}
                         >
-                          <div className="demo__confidence--option-left">
-                            {correctAge === capitalizedAgeName ? (
-                              <img
-                                src={radio_button}
-                                alt="Selected Radio Button"
-                              />
-                            ) : (
-                              <img
-                                src={radio_button_black}
-                                alt="Unselected Radio Button"
-                              />
-                            )}
-                            <div
-                              className="demo__confidence--option-title"
-                              style={{
-                                color:
-                                  correctAge === capitalizedAgeName
-                                    ? "#fff"
-                                    : "#1a1b1c",
-                              }}
-                            >
-                              {capitalizedAgeName}
-                            </div>
-                          </div>
+                          {Math.round(race.percentage * 100)}%
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+              {selectedDemo === "age" && sortedAge.length > 0 && (
+                <div className="demo__confidence--options">
+                  {sortedAge.map((age) => {
+                    const capitalizedAgeName =
+                      age.age.charAt(0).toUpperCase() + age.age.slice(1);
+                    return (
+                      <button
+                        className="demo__confidence--option"
+                        key={age.age + age.percentage}
+                        onClick={() => {
+                          setCorrectAge(capitalizedAgeName);
+                          setPercentAge(Math.round(age.percentage * 100));
+                        }}
+                        style={{
+                          backgroundColor:
+                            correctAge === capitalizedAgeName
+                              ? "#1a1b1c"
+                              : "#f3f3f4",
+                        }}
+                      >
+                        <div className="demo__confidence--option-left">
+                          {correctAge === capitalizedAgeName ? (
+                            <img
+                              src={radio_button}
+                              alt="Selected Radio Button"
+                            />
+                          ) : (
+                            <img
+                              src={radio_button_black}
+                              alt="Unselected Radio Button"
+                            />
+                          )}
                           <div
-                            className="demo__confidence--option-right"
+                            className="demo__confidence--option-title"
                             style={{
                               color:
                                 correctAge === capitalizedAgeName
@@ -405,63 +391,60 @@ function Demographics({ demoData }) {
                                   : "#1a1b1c",
                             }}
                           >
-                            {Math.round(age.percentage * 100)}%
+                            {capitalizedAgeName}
                           </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-              {selectedDemo === "sex" &&
-                sortedGender.length > 0 && (
-                  <div className="demo__confidence--options">
-                    {sortedGender.map((gender) => {
-                      const capitalizedGenderName =
-                        gender.gender.charAt(0).toUpperCase() +
-                        gender.gender.slice(1);
-                      return (
-                        <button
-                          className="demo__confidence--option"
-                          key={gender.gender + gender.percentage}
-                          onClick={() => {
-                            setCorrectGender(capitalizedGenderName);
-                            setPercentGender(
-                              Math.round(gender.percentage * 100)
-                            );
-                          }}
+                        </div>
+                        <div
+                          className="demo__confidence--option-right"
                           style={{
-                            backgroundColor:
-                              correctGender === capitalizedGenderName
-                                ? "#1a1b1c"
-                                : "#f3f3f4",
+                            color:
+                              correctAge === capitalizedAgeName
+                                ? "#fff"
+                                : "#1a1b1c",
                           }}
                         >
-                          <div className="demo__confidence--option-left">
-                            {correctGender === capitalizedGenderName ? (
-                              <img
-                                src={radio_button}
-                                alt="Selected Radio Button"
-                              />
-                            ) : (
-                              <img
-                                src={radio_button_black}
-                                alt="Unselected Radio Button"
-                              />
-                            )}
-                            <div
-                              className="demo__confidence--option-title"
-                              style={{
-                                color:
-                                  correctGender === capitalizedGenderName
-                                    ? "#fff"
-                                    : "#1a1b1c",
-                              }}
-                            >
-                              {capitalizedGenderName}
-                            </div>
-                          </div>
+                          {Math.round(age.percentage * 100)}%
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+              {selectedDemo === "sex" && sortedGender.length > 0 && (
+                <div className="demo__confidence--options">
+                  {sortedGender.map((gender) => {
+                    const capitalizedGenderName =
+                      gender.gender.charAt(0).toUpperCase() +
+                      gender.gender.slice(1);
+                    return (
+                      <button
+                        className="demo__confidence--option"
+                        key={gender.gender + gender.percentage}
+                        onClick={() => {
+                          setCorrectGender(capitalizedGenderName);
+                          setPercentGender(Math.round(gender.percentage * 100));
+                        }}
+                        style={{
+                          backgroundColor:
+                            correctGender === capitalizedGenderName
+                              ? "#1a1b1c"
+                              : "#f3f3f4",
+                        }}
+                      >
+                        <div className="demo__confidence--option-left">
+                          {correctGender === capitalizedGenderName ? (
+                            <img
+                              src={radio_button}
+                              alt="Selected Radio Button"
+                            />
+                          ) : (
+                            <img
+                              src={radio_button_black}
+                              alt="Unselected Radio Button"
+                            />
+                          )}
                           <div
-                            className="demo__confidence--option-right"
+                            className="demo__confidence--option-title"
                             style={{
                               color:
                                 correctGender === capitalizedGenderName
@@ -469,13 +452,25 @@ function Demographics({ demoData }) {
                                   : "#1a1b1c",
                             }}
                           >
-                            {Math.round(gender.percentage * 100)}%
+                            {capitalizedGenderName}
                           </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
+                        </div>
+                        <div
+                          className="demo__confidence--option-right"
+                          style={{
+                            color:
+                              correctGender === capitalizedGenderName
+                                ? "#fff"
+                                : "#1a1b1c",
+                          }}
+                        >
+                          {Math.round(gender.percentage * 100)}%
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
           <div className="demo__btns">
@@ -485,14 +480,14 @@ function Demographics({ demoData }) {
               </div>
               <div className="back__btn">
                 <div className="back__btn--border"></div>
-                <div className="back__btn--triangle">▶</div>
+                <div className="back__btn--triangle">▶{"\uFE0E"}</div>
                 <div className="back__btn--title">BACK</div>
               </div>
             </a>
             <a href="/" className="home__btn">
               <div className="proceed__btn--title">HOME</div>
               <div className="proceed__btn--border"></div>
-              <div className="proceed__btn--triangle">▶</div>
+              <div className="proceed__btn--triangle">▶{"\uFE0E"}</div>
             </a>
           </div>
         </div>

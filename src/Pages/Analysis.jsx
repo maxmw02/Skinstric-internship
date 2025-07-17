@@ -88,9 +88,12 @@ function Analysis({
                 <img src={Medium_Square} className="medium__square--analysis" />
                 <img src={Small_Square} className="small__square--analysis" />
                 <div className="scan__btn--wrapper">
-                  <button className="scan__btn" onClick={() => {
-                    setVisible('block')
-                  }}>
+                  <button
+                    className="scan__btn"
+                    onClick={() => {
+                      setVisible("block");
+                    }}
+                  >
                     <img src={camera_icon} />
                     <div className="scan__btn--description">
                       <p>
@@ -100,17 +103,27 @@ function Analysis({
                       <img src={line} alt="" />
                     </div>
                   </button>
-                    <div className="access__wrapper" style={{display: visible}}>
-                      <h2>ALLOW A.I. TO ACCESS YOUR CAMERA</h2>
-                      <div className="access__buttons">
-                        <button className="deny" onClick={() => {
-                          setVisible('none')
-                        }}>DENY</button>
-                        <button className="allow" onClick={() => {
-                          navigate('/camera')
-                        }}>ALLOW</button>
-                      </div>
+                  <div className="access__wrapper" style={{ display: visible }}>
+                    <h2>ALLOW A.I. TO ACCESS YOUR CAMERA</h2>
+                    <div className="access__buttons">
+                      <button
+                        className="deny"
+                        onClick={() => {
+                          setVisible("none");
+                        }}
+                      >
+                        DENY
+                      </button>
+                      <button
+                        className="allow"
+                        onClick={() => {
+                          navigate("/camera");
+                        }}
+                      >
+                        ALLOW
+                      </button>
                     </div>
+                  </div>
                 </div>
               </div>
               <div className="gallery">
@@ -118,10 +131,13 @@ function Analysis({
                 <img src={Medium_Square} className="medium__square--analysis" />
                 <img src={Small_Square} className="small__square--analysis" />
                 <div className="gallery__btn--wrapper">
-                  <button className="gallery__btn" onClick={() => {
-                    setVisible('none')
-                    handleGalleryClick();
-                  }}>
+                  <button
+                    className="gallery__btn"
+                    onClick={() => {
+                      setVisible("none");
+                      handleGalleryClick();
+                    }}
+                  >
                     <img src={gallery_icon} alt="" />
                     <input
                       type="file"
@@ -153,12 +169,9 @@ function Analysis({
         </div>
         <div className="intro__btns">
           <a href="/intro">
-            <div className="back__btn--small">
-              <p>BACK</p>
-            </div>
             <div className="back__btn">
               <div className="back__btn--border"></div>
-              <div className="back__btn--triangle">▶</div>
+              <div className="back__btn--triangle">▶{"\uFE0E"}</div>
               <div className="back__btn--title">BACK</div>
             </div>
           </a>

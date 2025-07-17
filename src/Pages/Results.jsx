@@ -17,7 +17,10 @@ function Results() {
       <Nav />
       <div className="results">
         <div className="results__title">A.I. ANALYSIS</div>
-        <div className="results__description">A.I. HAS ESTIMATED THE FOLLOWING. <br />FIX ESTIMATED INFORMATION IF NEEDED.</div>
+        <div className="results__description">
+          A.I. HAS ESTIMATED THE FOLLOWING. <br />
+          FIX ESTIMATED INFORMATION IF NEEDED.
+        </div>
       </div>
       <div className="results__options--wrapper">
         <div className="results__options">
@@ -128,14 +131,14 @@ function Results() {
         <a href="/analysis">
           <div className="back__btn">
             <div className="back__btn--border"></div>
-            <div className="back__btn--triangle">▶</div>
+            <div className="back__btn--triangle">▶{"\uFE0E"}</div>
             <div className="back__btn--title">BACK</div>
           </div>
         </a>
         <a href="/demographics" className="get__summary--btn">
           <div className="proceed__btn--title">GET SUMMARY</div>
           <div className="proceed__btn--border"></div>
-          <div className="proceed__btn--triangle">▶</div>
+          <div className="proceed__btn--triangle">▶{"\uFE0E"}</div>
         </a>
       </div>
     </>

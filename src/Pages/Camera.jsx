@@ -85,7 +85,7 @@ function Camera({ setPreview, preview, uploadImage }) {
           <a href="/analysis">
             <div className="capture__back--btn">
               <div className="capture__back--btn-border"></div>
-              <div className="capture__back--btn-triangle">▶</div>
+              <div className="capture__back--btn-triangle">▶{"\uFE0E"}</div>
               <div className="capture__back--btn-title">BACK</div>
             </div>
           </a>

@@ -160,7 +160,7 @@ function IntroForm() {
         <a href="/">
           <div className="back__btn">
             <div className="back__btn--border"></div>
-            <div className="back__btn--triangle">▶</div>
+            <div className="back__btn--triangle">▶{"\uFE0E"}</div>
             <div className="back__btn--title">BACK</div>
           </div>
         </a>
@@ -168,7 +168,7 @@ function IntroForm() {
           <a href="/analysis" className="proceed__btn">
             <div className="proceed__btn--title">PROCEED</div>
             <div className="proceed__btn--border"></div>
-            <div className="proceed__btn--triangle">▶</div>
+            <div className="proceed__btn--triangle">▶{"\uFE0E"}</div>
           </a>
         )}
       </div>

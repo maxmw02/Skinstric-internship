@@ -36,7 +36,7 @@ function Landing() {
         <a className="small__landing--btn" href="/intro">
           <span className="small__landing--btn-name">ENTER EXPERIENCE</span>
           <div className="small__landing--btn-border"></div>
-          <span className="small__landing--triangle">▶</span>
+          <span className="small__landing--triangle">▶{"\uFE0E"}</span>
         </a>
         <div className="small__landing--squares">
           <div className="outer__landing--square"></div>
@@ -62,7 +62,7 @@ function Landing() {
               }}
             >
               <div className="left__btn--border"></div>
-              <span className="left__triangle">▶</span>
+              <span className="left__triangle">▶{"\uFE0E"}</span>
               <span className="left__btn--name">DISCOVER A.I.</span>
             </button>
           </div>
@@ -89,7 +89,7 @@ function Landing() {
             >
               <span className="right__btn--name">TAKE TEST</span>
               <div className="right__btn--border"></div>
-              <span className="right__triangle">▶</span>
+              <span className="right__triangle">▶{"\uFE0E"}</span>
             </a>
           </div>
         </div>
